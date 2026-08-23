@@ -1,13 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { 
   ShieldCheck, 
   Rocket, 
   HeartHandshake, 
-  Cpu,
-  ArrowRight
+  Cpu
 } from 'lucide-react';
-import { SectionHeading } from '../common/SectionHeading';
 import { StatCounter } from '../common/StatCounter';
 import { AgencyComparison } from './AgencyComparison';
 import { Button } from '../common/Button';

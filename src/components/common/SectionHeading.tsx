@@ -34,7 +34,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wide uppercase glass-pill text-slate-700 dark:text-cyan-300 border-slate-200 dark:border-cyan-500/20"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wide uppercase bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-cyan-500/20"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
             <span>{badge}</span>

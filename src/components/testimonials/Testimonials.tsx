@@ -5,17 +5,14 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Quote, 
-  ShieldCheck, 
-  TrendingUp,
-  Building,
-  CheckCircle2
+  TrendingUp
 } from 'lucide-react';
 import { testimonialsData } from '../../data/testimonialsData';
 import { SectionHeading } from '../common/SectionHeading';
 import { Button } from '../common/Button';
 
 interface TestimonialsProps {
-  onOpenConsultation: () => void;
+  onOpenConsultation?: () => void;
 }
 
 export const Testimonials: React.FC<TestimonialsProps> = ({
@@ -64,7 +61,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
 
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 text-xs font-mono font-bold">
                   <TrendingUp className="w-3.5 h-3.5" />
-                  <span>{activeReview.results}</span>
+                  <span>{activeReview.metricsResult}</span>
                 </div>
               </div>
 
@@ -87,18 +84,18 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 <div className="flex items-center gap-4">
                   <img
                     src={activeReview.avatar}
-                    alt={activeReview.name}
+                    alt={activeReview.author}
                     className="w-14 h-14 rounded-2xl object-cover border-2 border-cyan-500"
                   />
                   <div>
                     <h4 className="text-base font-bold text-slate-900 dark:text-white font-display">
-                      {activeReview.name}
+                      {activeReview.author}
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
                       {activeReview.role} • <span className="text-cyan-600 dark:text-cyan-400 font-semibold">{activeReview.company}</span>
                     </p>
                     <span className="text-[10px] font-mono text-slate-400">
-                      Project: {activeReview.project}
+                      Sector: {activeReview.industry}
                     </span>
                   </div>
                 </div>
@@ -128,6 +125,20 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               </div>
             </div>
           </div>
+
+          {onOpenConsultation && (
+            <div className="mt-10 text-center">
+              <Button
+                variant="accent"
+                size="md"
+                onClick={onOpenConsultation}
+                showArrow
+                className="font-bold"
+              >
+                Join Our Roster of Successful Enterprise Clients
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </section>

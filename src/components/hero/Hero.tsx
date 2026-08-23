@@ -4,7 +4,6 @@ import {
   ShieldCheck, 
   CheckCircle2, 
   Award,
-  ArrowRight,
   Sparkles
 } from 'lucide-react';
 import { Button } from '../common/Button';

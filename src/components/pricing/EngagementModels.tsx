@@ -1,14 +1,5 @@
 import React from 'react';
-import { 
-  Check, 
-  Sparkles, 
-  ShieldCheck, 
-  Clock, 
-  ArrowRight,
-  Layers,
-  Zap,
-  Lock
-} from 'lucide-react';
+import { Check } from 'lucide-react';
 import { pricingPlans } from '../../data/processData';
 import { SectionHeading } from '../common/SectionHeading';
 import { Button } from '../common/Button';
@@ -34,7 +25,7 @@ export const EngagementModels: React.FC<EngagementModelsProps> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {pricingPlans.map((plan, index) => {
-            const isPopular = plan.popular;
+            const isPopular = plan.recommended;
 
             return (
               <div
@@ -71,7 +62,7 @@ export const EngagementModels: React.FC<EngagementModelsProps> = ({
                   <div className="p-4 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 mb-6">
                     <div className="text-xs text-slate-500 mb-0.5 font-mono">Pricing Structure:</div>
                     <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-mono">
-                      {plan.pricingBasis}
+                      {plan.priceModel}
                     </div>
                   </div>
 
@@ -98,7 +89,7 @@ export const EngagementModels: React.FC<EngagementModelsProps> = ({
                     showArrow
                     className="w-full justify-center font-bold"
                   >
-                    Select {plan.name}
+                    {plan.ctaText || `Select ${plan.name}`}
                   </Button>
                 </div>
               </div>

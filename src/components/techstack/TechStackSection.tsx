@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Layers, 
   Cpu, 
@@ -14,7 +13,6 @@ import {
   TableProperties, 
   Binary, 
   Server,
-  CheckCircle2, 
   Code,
   Terminal,
   ArrowRight

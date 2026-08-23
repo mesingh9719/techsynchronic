@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  CheckCircle2, 
-  Terminal,
-  ShieldCheck,
-  ChevronRight,
-  ArrowRight,
-  Sparkles
-} from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { processSteps } from '../../data/processData';
 import { SectionHeading } from '../common/SectionHeading';
 import { Button } from '../common/Button';
@@ -19,7 +12,7 @@ interface ProcessTimelineProps {
 export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
   onOpenConsultation
 }) => {
-  const [activeStepId, setActiveStepId] = useState<number>(1);
+  const [activeStepId, setActiveStepId] = useState<string>('01');
   const activeStep = processSteps.find((s) => s.step === activeStepId) || processSteps[0];
 
   return (
@@ -51,7 +44,7 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className={`text-xs font-mono font-bold ${isSelected ? 'text-cyan-300 dark:text-slate-900' : 'text-slate-400'}`}>
-                    PHASE 0{step.step}
+                    PHASE {step.step}
                   </span>
                   <span className={`text-[10px] font-mono ${isSelected ? 'text-white/80 dark:text-slate-900/80' : 'text-slate-500'}`}>
                     {step.duration}
@@ -77,7 +70,7 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
             <div className="lg:col-span-6 space-y-4">
               <div className="flex items-center gap-3">
                 <span className="w-10 h-10 rounded-xl bg-cyan-100 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-400 font-mono font-bold flex items-center justify-center border border-cyan-200 dark:border-cyan-800">
-                  0{activeStep.step}
+                  {activeStep.step}
                 </span>
                 <div>
                   <span className="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase">

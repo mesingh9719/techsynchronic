@@ -1,55 +1,27 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-display: 'Syne', 'Outfit', sans-serif;
     --font-heading: 'Outfit', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-
-    /* Light Theme Palette: Crisp architectural porcelain & deep slate */
-    --color-bg-page: #F8FAFC;
-    --color-bg-surface: #FFFFFF;
-    --color-bg-surface-elevated: #F1F5F9;
-    --color-bg-card: rgba(255, 255, 255, 0.85);
-    --color-bg-card-elevated: #FFFFFF;
-    --color-border-subtle: rgba(15, 23, 42, 0.1);
-    --color-border-accent: rgba(2, 132, 199, 0.3);
-    --color-text-main: #0F172A;
-    --color-text-muted: #475569;
-    --color-text-faint: #94A3B8;
-    --color-accent-brand: #0284C7;
-    --color-accent-cta: #D97706;
-    --color-pill-bg: rgba(15, 23, 42, 0.04);
-    --color-pill-border: rgba(15, 23, 42, 0.1);
-    --color-header-bg: rgba(248, 250, 252, 0.85);
   }
 
-  .dark {
-    /* Dark Theme Palette: Deep carbon ink & precision cyan glow */
-    --color-bg-page: #070A11;
-    --color-bg-surface: #0B0F19;
-    --color-bg-surface-elevated: #111827;
-    --color-bg-card: rgba(15, 23, 42, 0.65);
-    --color-bg-card-elevated: #0F172A;
-    --color-border-subtle: rgba(255, 255, 255, 0.08);
-    --color-border-accent: rgba(56, 189, 248, 0.35);
-    --color-text-main: #F8FAFC;
-    --color-text-muted: #94A3B8;
-    --color-text-faint: #64748B;
-    --color-accent-brand: #38BDF8;
-    --color-accent-cta: #F59E0B;
-    --color-pill-bg: rgba(30, 41, 59, 0.6);
-    --color-pill-border: rgba(255, 255, 255, 0.12);
-    --color-header-bg: rgba(7, 10, 17, 0.85);
+  html {
+    font-family: var(--font-sans);
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-bg-page);
-    color: var(--color-text-main);
     overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -73,50 +45,20 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-page);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-subtle);
+  background: rgba(148, 163, 184, 0.4);
   border-radius: 4px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.6);
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-brand);
-}
-
-/* Theme helper classes */
-.bg-theme-page { background-color: var(--color-bg-page); }
-.bg-theme-surface { background-color: var(--color-bg-surface); }
-.bg-theme-elevated { background-color: var(--color-bg-surface-elevated); }
-.bg-theme-card { background-color: var(--color-bg-card); }
-.border-theme-subtle { border-color: var(--color-border-subtle); }
-.border-theme-accent { border-color: var(--color-border-accent); }
-.text-theme-main { color: var(--color-text-main); }
-.text-theme-muted { color: var(--color-text-muted); }
-.text-theme-faint { color: var(--color-text-faint); }
-.text-theme-brand { color: var(--color-accent-brand); }
-
-/* Glassmorphism & Cyber Card Utilities */
-.glass-panel {
-  background: var(--color-bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-border-subtle);
-}
-
-.glass-pill {
-  background: var(--color-pill-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--color-pill-border);
-}
-
-/* Architectural technical stamp */
-.arch-tag {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  background: #0284c7;
 }
 
 /* Text Gradients */
@@ -144,13 +86,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Precision Hairline Dividers */
-.hairline-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-subtle) 20%, var(--color-border-subtle) 80%, transparent);
-}
-
-/* Continuous Marquee */
+/* Continuous Marquee Animation */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -164,14 +100,4 @@
 
 .animate-marquee:hover {
   animation-play-state: paused;
-}
-
-/* Pulse Glow */
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.05); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
 }

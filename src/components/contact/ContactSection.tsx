@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { 
   Phone, 
   Mail, 
   ShieldCheck, 
   CheckCircle2, 
-  Clock, 
   Calendar, 
-  MessageCircle,
-  Sparkles
+  MessageCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SectionHeading } from '../common/SectionHeading';

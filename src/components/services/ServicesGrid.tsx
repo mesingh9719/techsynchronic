@@ -11,10 +11,7 @@ import {
   Sparkles, 
   ChevronRight,
   Cpu,
-  Clock,
-  Layers,
-  ArrowRight,
-  ShieldCheck
+  Clock
 } from 'lucide-react';
 import { servicesData } from '../../data/servicesData';
 import type { ServiceItem } from '../../types';

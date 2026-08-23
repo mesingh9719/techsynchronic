@@ -7,7 +7,6 @@ import {
   ChevronDown, 
   Sun, 
   Moon, 
-  ArrowRight,
   ShieldCheck,
   Users,
   Building2,
@@ -17,7 +16,7 @@ import {
   ServerCog
 } from 'lucide-react';
 import { Button } from '../common/Button';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 
 interface NavbarProps {
   onOpenConsultation: () => void;

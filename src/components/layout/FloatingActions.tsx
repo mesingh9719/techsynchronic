@@ -48,21 +48,21 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
             initial={{ opacity: 0, x: 20, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="pointer-events-auto bg-slate-900/95 border border-cyan-500/40 backdrop-blur-xl p-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.6)] flex items-center gap-3 max-w-xs text-xs text-slate-200 mb-1"
+            className="pointer-events-auto bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-cyan-500/40 backdrop-blur-xl p-3.5 rounded-2xl shadow-xl flex items-center gap-3 max-w-xs text-xs text-slate-800 dark:text-slate-200 mb-1 text-left"
           >
-            <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-cyan-50 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-4 h-4" />
             </div>
             <div 
               onClick={onOpenConsultation}
               className="cursor-pointer"
             >
-              <p className="font-bold text-white hover:text-cyan-300 transition-colors">Need a quick project estimate?</p>
-              <p className="text-slate-400 text-[11px]">Calculate cost & timeline in 60s</p>
+              <p className="font-bold text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors">Need a project estimate?</p>
+              <p className="text-slate-500 dark:text-slate-400 text-[11px]">Calculate cost & timeline in 60s</p>
             </div>
             <button
               onClick={() => setShowTooltip(false)}
-              className="text-slate-500 hover:text-slate-300 p-1 -mr-1"
+              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 -mr-1 cursor-pointer"
               aria-label="Close message"
             >
               <X className="w-3.5 h-3.5" />
@@ -71,7 +71,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
         )}
       </AnimatePresence>
 
-      <div className="flex items-center gap-2 pointer-events-auto">
+      <div className="flex items-center gap-2.5 pointer-events-auto">
         {/* Back to Top */}
         <AnimatePresence>
           {showBackToTop && (
@@ -80,7 +80,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
               onClick={scrollToTop}
-              className="w-11 h-11 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 shadow-lg flex items-center justify-center transition-all cursor-pointer focus:outline-none"
+              className="w-11 h-11 rounded-full bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white border border-slate-200 dark:border-slate-700 shadow-md flex items-center justify-center transition-all cursor-pointer focus:outline-none"
               aria-label="Scroll back to top"
             >
               <ArrowUp className="w-4 h-4" />
@@ -93,9 +93,9 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onOpenEstimator}
-          className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/90 text-cyan-400 hover:text-cyan-300 border border-cyan-500/40 shadow-[0_0_20px_rgba(6,182,212,0.25)] text-xs font-bold transition-all cursor-pointer backdrop-blur-md"
+          className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-white dark:bg-slate-900/90 text-slate-800 dark:text-cyan-400 hover:text-cyan-600 dark:hover:text-cyan-300 border border-slate-300 dark:border-cyan-500/40 shadow-md text-xs font-bold transition-all cursor-pointer backdrop-blur-md"
         >
-          <Calculator className="w-4 h-4 text-cyan-400" />
+          <Calculator className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
           <span>Estimate Scope</span>
         </motion.button>
 
@@ -104,7 +104,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           onClick={openWhatsApp}
-          className="relative w-13 h-13 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-[0_0_25px_rgba(16,185,129,0.5)] flex items-center justify-center transition-all cursor-pointer focus:outline-none group"
+          className="relative w-13 h-13 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg flex items-center justify-center transition-all cursor-pointer focus:outline-none group"
           aria-label="Chat on WhatsApp"
         >
           {/* Pulsing ring */}

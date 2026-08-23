@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { 
   Terminal, 
-  Mail, 
-  Phone, 
   ShieldCheck, 
   CheckCircle2, 
   Send

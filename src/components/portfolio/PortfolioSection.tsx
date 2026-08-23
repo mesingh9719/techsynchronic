@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   CheckCircle2, 
-  X,
-  ArrowRight,
-  TrendingUp,
-  ShieldCheck,
-  Cpu
+  X
 } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 import type { CaseStudy } from '../../types';

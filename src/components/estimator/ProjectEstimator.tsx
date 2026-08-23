@@ -4,14 +4,12 @@ import {
   Check, 
   Clock, 
   Layers, 
-  CheckCircle2, 
   Building2,
   Users,
   UserCheck,
   Code2,
   LayoutTemplate,
-  ServerCog,
-  Sparkles
+  ServerCog
 } from 'lucide-react';
 import { SectionHeading } from '../common/SectionHeading';
 import { Button } from '../common/Button';

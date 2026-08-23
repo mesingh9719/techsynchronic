@@ -42,21 +42,21 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#080C14] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200 relative overflow-x-hidden">
-      {/* Top Navbar */}
+    <div className="min-h-screen bg-slate-50 dark:bg-[#070A11] text-slate-900 dark:text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-600 dark:selection:text-cyan-200 relative overflow-x-hidden transition-colors duration-300">
+      {/* Top Streamlined Navbar with Theme Toggle */}
       <Navbar
         onOpenConsultation={() => handleOpenConsultation('Executive Consultation')}
-        onOpenEstimator={() => handleOpenEstimator()}
+        onSelectService={(serviceId) => handleOpenEstimator(serviceId)}
       />
 
       <main>
-        {/* 1. Hero Section */}
+        {/* 1. Asymmetrical Hero Section with Interactive HUD */}
         <Hero
           onOpenConsultation={() => handleOpenConsultation('Free Strategy Call')}
           onOpenEstimator={() => handleOpenEstimator()}
         />
 
-        {/* 2. Services Grid (CRM, ERP, HRMS, Custom Software, CMS, Server/DevOps) */}
+        {/* 2. Interactive Split-Screen Services Matrix */}
         <ServicesGrid
           onOpenConsultation={(topic) => handleOpenConsultation(topic)}
           onSelectServiceForEstimator={(serviceId) => handleOpenEstimator(serviceId)}
@@ -69,47 +69,49 @@ export const App: React.FC = () => {
           onRequestQuote={handleClaimQuoteFromEstimator}
         />
 
-        {/* 4. Tech Stack Section (Node.js, Python, PHP, WordPress, Laravel, FastAPI, React.js, Tailwind, VPS, MySQL, MongoDB, PostgreSQL, Vector DB) */}
+        {/* 4. Tech Stack Infrastructure & Benchmark Lab */}
         <TechStackSection
           onOpenConsultation={(tech) => handleOpenConsultation(`Tech Stack Architecture: ${tech}`)}
         />
 
-        {/* 5. Why Choose Us & Agency Comparison */}
+        {/* 5. Why Choose Us & Agency Comparison Manifesto */}
         <WhyChooseUs
           onOpenConsultation={() => handleOpenConsultation('Why Choose Us - Consultation')}
         />
 
-        {/* 6. Process / Workflow Timeline (5 Steps) */}
+        {/* 6. Process / Delivery Roadmap */}
         <ProcessTimeline
           onOpenConsultation={() => handleOpenConsultation('Agile Sprint Roadmap')}
         />
 
-        {/* 7. Portfolio & Case Studies */}
+        {/* 7. Magazine-Style Portfolio & Case Studies */}
         <PortfolioSection
           onOpenConsultation={(category) => handleOpenConsultation(`Case Study Inquiry: ${category}`)}
         />
 
-        {/* 8. Client Testimonials */}
-        <Testimonials />
+        {/* 8. Verified Client Testimonials */}
+        <Testimonials
+          onOpenConsultation={() => handleOpenConsultation('Testimonials Inquiry')}
+        />
 
-        {/* 9. Engagement & Pricing Models */}
+        {/* 9. Commercial Engagement & Pricing Tiers */}
         <EngagementModels
           onOpenConsultation={(plan) => handleOpenConsultation(`Engagement Model: ${plan}`)}
         />
 
-        {/* 10. High-Impact Contact & Lead Capture */}
+        {/* 10. High-Impact Contact & Lead Capture Terminal */}
         <ContactSection
           key={prefillScope}
           prefillScope={prefillScope}
         />
       </main>
 
-      {/* Footer */}
+      {/* Structured Footer */}
       <Footer
         onOpenConsultation={() => handleOpenConsultation('Footer Direct Strategy')}
       />
 
-      {/* Floating CTA & WhatsApp Action Bar */}
+      {/* Floating Quick Action Controls */}
       <FloatingActions
         onOpenConsultation={() => handleOpenConsultation('Floating CTA Consultation')}
         onOpenEstimator={() => handleOpenEstimator()}

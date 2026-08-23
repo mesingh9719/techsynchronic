@@ -4,7 +4,6 @@ import {
   X, 
   Sparkles, 
   CheckCircle2, 
-  ShieldCheck, 
   MessageCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
