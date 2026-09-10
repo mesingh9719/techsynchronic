@@ -13,12 +13,15 @@ import { ContactSection } from './components/contact/ContactSection';
 import { Footer } from './components/layout/Footer';
 import { FloatingActions } from './components/layout/FloatingActions';
 import { ConsultationModal } from './components/contact/ConsultationModal';
+import FloatingCTA from './components/FloatingCTA';
+import SignupModal from './components/SignupModal';
 
 export const App: React.FC = () => {
   const [consultationModalOpen, setConsultationModalOpen] = useState(false);
   const [consultationTopic, setConsultationTopic] = useState<string>('Custom Enterprise Software Strategy');
   const [prefillScope, setPrefillScope] = useState<string>('');
   const [estimatorInitialService, setEstimatorInitialService] = useState<string>('crm');
+  const [signupModalOpen, setSignupModalOpen] = useState(false);
 
   const handleOpenConsultation = (topic?: string) => {
     if (topic) setConsultationTopic(topic);
@@ -42,7 +45,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#070A11] text-slate-900 dark:text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-600 dark:selection:text-cyan-200 relative overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#070A11] text-slate-900 dark:text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-600 dark:selection:text-cyan-200 relative overflow-x-hidden">
       {/* Top Streamlined Navbar with Theme Toggle */}
       <Navbar
         onOpenConsultation={() => handleOpenConsultation('Executive Consultation')}
@@ -117,6 +120,9 @@ export const App: React.FC = () => {
         onOpenEstimator={() => handleOpenEstimator()}
       />
 
+      {/* New Floating CTA (global) */}
+      <FloatingCTA onOpenSignup={() => setSignupModalOpen(true)} />
+
       {/* Global Quick-Booking Consultation Modal */}
       <ConsultationModal
         key={`${consultationTopic}-${consultationModalOpen}`}
@@ -124,6 +130,9 @@ export const App: React.FC = () => {
         onClose={() => setConsultationModalOpen(false)}
         initialTopic={consultationTopic}
       />
+
+      {/* Signup Modal */}
+      <SignupModal isOpen={signupModalOpen} onClose={() => setSignupModalOpen(false)} />
     </div>
   );
 };
