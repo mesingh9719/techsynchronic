@@ -1,4 +1,3 @@
-import React from 'react';
 import PrimaryButton from './PrimaryButton';
 import { trackCTA } from '../lib/analytics';
 
