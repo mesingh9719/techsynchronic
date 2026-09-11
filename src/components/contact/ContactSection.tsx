@@ -11,6 +11,7 @@ import confetti from 'canvas-confetti';
 import { SectionHeading } from '../common/SectionHeading';
 import { Button } from '../common/Button';
 import type { ContactFormData } from '../../types';
+import { submitLead } from '../../lib/leadSubmission';
 
 interface ContactSectionProps {
   prefillScope?: string;
@@ -30,12 +31,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefillScope }) 
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
 
-    setTimeout(() => {
+    try {
+      await submitLead('New Project Inquiry', {
+        ...formData,
+        projectType: formData.projectType,
+        budgetRange: formData.budgetRange,
+        timeline: formData.timeline
+      });
       setIsSubmitting(false);
       setIsSubmitted(true);
       try {
@@ -47,7 +56,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefillScope }) 
       } catch {
         // fallback
       }
-    }, 1200);
+    } catch {
+      setIsSubmitting(false);
+      setSubmitError('We could not send your inquiry. Please try again or email us directly.');
+    }
   };
 
   const openWhatsApp = () => {
@@ -127,8 +139,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefillScope }) 
             <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 font-mono text-xs shadow-sm">
               <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
                 <Mail className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-                <a href="mailto:contact@techsynchronic.com" className="hover:text-cyan-600 dark:hover:text-cyan-400 underline">
-                  contact@techsynchronic.com
+                <a href="mailto:mesingh9719@gmail.com,susingh9719@gmail.com" className="hover:text-cyan-600 dark:hover:text-cyan-400 underline">
+                  mesingh9719@gmail.com / susingh9719@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
@@ -290,6 +302,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefillScope }) 
                   >
                     Request Technical Scope & Free Consultation
                   </Button>
+                  {submitError && (
+                    <p className="text-sm text-red-600 dark:text-red-400" role="alert">
+                      {submitError}
+                    </p>
+                  )}
                 </form>
               )}
             </div>

@@ -6,6 +6,7 @@ import {
   Send
 } from 'lucide-react';
 import { Button } from '../common/Button';
+import { submitLead } from '../../lib/leadSubmission';
 
 interface FooterProps {
   onOpenConsultation: () => void;
@@ -14,15 +15,19 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [subscriptionError, setSubscriptionError] = useState('');
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubscriptionError('');
     if (newsletterEmail) {
-      setSubscribed(true);
-      setTimeout(() => {
+      try {
+        await submitLead('New Engineering Briefing Subscription', { email: newsletterEmail });
+        setSubscribed(true);
         setNewsletterEmail('');
-        setSubscribed(false);
-      }, 4000);
+      } catch {
+        setSubscriptionError('Subscription failed. Please try again.');
+      }
     }
   };
 
@@ -166,6 +171,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
               {subscribed && (
                 <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono block">
                   ✓ Briefing subscription activated!
+                </span>
+              )}
+              {subscriptionError && (
+                <span className="text-[10px] text-red-600 dark:text-red-400 font-mono block" role="alert">
+                  {subscriptionError}
                 </span>
               )}
             </form>

@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Button } from '../common/Button';
+import { submitLead } from '../../lib/leadSubmission';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -26,14 +27,17 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   const [topic, setTopic] = useState(initialTopic || 'General Software Engineering & Consultation');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
 
-    setTimeout(() => {
+    try {
+      await submitLead('New Strategy Call Request', { name, email, phone, topic });
       setIsSubmitting(false);
       setIsSubmitted(true);
       try {
@@ -45,7 +49,10 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
       } catch {
         // Confetti fallback
       }
-    }, 1000);
+    } catch {
+      setIsSubmitting(false);
+      setSubmitError('We could not send your request. Please try again or email us directly.');
+    }
   };
 
   const handleClose = () => {
@@ -191,6 +198,11 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   >
                     Confirm & Reserve 30-Min Strategy Call
                   </Button>
+                  {submitError && (
+                    <p className="mt-2 text-sm text-red-600 dark:text-red-400" role="alert">
+                      {submitError}
+                    </p>
+                  )}
                 </div>
 
                 <div className="pt-2 text-center">

@@ -1,15 +1,23 @@
 import React from 'react';
 import PrimaryButton from './PrimaryButton';
 import { trackCTA } from '../lib/analytics';
+import { submitLead } from '../lib/leadSubmission';
 
 export default function SignupModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   if (!isOpen) return null;
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     trackCTA('signup_submit');
-    // In a real app, call API here. For now just close.
-    onClose();
+    const formData = new FormData(e.currentTarget);
+    const email = String(formData.get('email') || '');
+
+    try {
+      await submitLead('New Free Trial Signup', { email });
+      onClose();
+    } catch {
+      // Keep the modal open so the user can retry after a delivery failure.
+    }
   }
 
   return (
@@ -21,7 +29,7 @@ export default function SignupModal({ isOpen, onClose }: { isOpen: boolean; onCl
         </div>
         <form onSubmit={submit} className="mt-4 space-y-4">
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">Email</label>
-          <input required type="email" className="w-full rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100" placeholder="you@company.com" />
+          <input name="email" required type="email" className="w-full rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100" placeholder="you@company.com" />
           <div className="flex justify-end">
             <PrimaryButton type="submit">Start free</PrimaryButton>
           </div>
