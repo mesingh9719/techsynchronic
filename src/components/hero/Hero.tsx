@@ -37,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({
   }, [rotatingServices.length]);
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-36 md:pb-28 overflow-hidden">
+    <section id="home" aria-labelledby="hero-heading" className="relative pt-32 pb-20 md:pt-36 md:pb-28 overflow-hidden">
       {/* Precision architectural hairline background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.04)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none -z-10" />
 
@@ -69,7 +69,7 @@ export const Hero: React.FC<HeroProps> = ({
               transition={{ duration: 0.5, delay: 0.1 }}
               className="space-y-3"
             >
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.05] font-display">
+              <h1 id="hero-heading" className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.05] font-display">
                 We build the software that{' '}
                 <span className="italic font-normal underline decoration-cyan-500/50 underline-offset-8">
                   runs
