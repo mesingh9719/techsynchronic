@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/hero/Hero';
 import { ServicesGrid } from './components/services/ServicesGrid';
@@ -133,6 +134,7 @@ export const App: React.FC = () => {
 
       {/* Signup Modal */}
       <SignupModal isOpen={signupModalOpen} onClose={() => setSignupModalOpen(false)} />
+      <Analytics />
     </div>
   );
 };
