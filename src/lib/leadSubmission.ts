@@ -9,6 +9,7 @@ export async function submitLead(subject: string, fields: Record<string, string>
       'Content-Type': 'application/json',
       Accept: 'application/json'
     },
+    signal: AbortSignal.timeout(20_000),
     body: JSON.stringify({
       ...fields,
       _cc: SECONDARY_LEAD_EMAIL,
@@ -21,8 +22,8 @@ export async function submitLead(subject: string, fields: Record<string, string>
     throw new Error(`Lead submission failed with status ${response.status}`);
   }
 
-  const result = (await response.json()) as { success?: boolean };
-  if (result.success === false) {
+  const result = (await response.json()) as { success?: boolean | string };
+  if (result.success !== true && result.success !== 'true') {
     throw new Error('Lead submission was rejected by the email service');
   }
 }

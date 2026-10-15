@@ -1,142 +1,53 @@
-import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/layout/Navbar';
-import { Hero } from './components/hero/Hero';
-import { ServicesGrid } from './components/services/ServicesGrid';
-import { ProjectEstimator } from './components/estimator/ProjectEstimator';
-import { TechStackSection } from './components/techstack/TechStackSection';
-import { WhyChooseUs } from './components/whychooseus/WhyChooseUs';
-import { ProcessTimeline } from './components/process/ProcessTimeline';
-import { PortfolioSection } from './components/portfolio/PortfolioSection';
-import { Testimonials } from './components/testimonials/Testimonials';
-import { EngagementModels } from './components/pricing/EngagementModels';
-import { ContactSection } from './components/contact/ContactSection';
 import { Footer } from './components/layout/Footer';
-import { FloatingActions } from './components/layout/FloatingActions';
-import { ConsultationModal } from './components/contact/ConsultationModal';
-import FloatingCTA from './components/FloatingCTA';
-import SignupModal from './components/SignupModal';
+import { HomePage } from './pages/HomePage';
+import { ServicesPage } from './pages/ServicesPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { getPage } from './lib/pages';
+import { AnimationProvider } from './components/animation/AnimationProvider';
+import { SiteParticles } from './components/animation/SiteParticles';
+import { WhatsAppWidget } from './components/contact/WhatsAppWidget';
 
-export const App: React.FC = () => {
-  const [consultationModalOpen, setConsultationModalOpen] = useState(false);
-  const [consultationTopic, setConsultationTopic] = useState<string>('Custom Enterprise Software Strategy');
-  const [prefillScope, setPrefillScope] = useState<string>('');
-  const [estimatorInitialService, setEstimatorInitialService] = useState<string>('crm');
-  const [signupModalOpen, setSignupModalOpen] = useState(false);
-
-  const handleOpenConsultation = (topic?: string) => {
-    if (topic) setConsultationTopic(topic);
-    setConsultationModalOpen(true);
-  };
-
-  const handleOpenEstimator = (serviceId?: string) => {
-    if (serviceId) setEstimatorInitialService(serviceId);
-    const elem = document.getElementById('estimator');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
+export default function App({ pathname = typeof window === 'undefined' ? '/' : window.location.pathname }: { pathname?: string }) {
+  const page = getPage(pathname);
+  useEffect(() => {
+    const legacyLinks: Record<string, string> = {
+      '#estimator': '/contact/', '#pricing': '/contact/', '#portfolio': '/#why-us',
+      '#testimonials': '/#why-us', '#tech-stack': '/services/',
+      '#contact': '/contact/', '#about': '/about/',
+    };
+    const destination = page.id === 'home' && legacyLinks[window.location.hash];
+    if (destination) window.location.replace(destination);
+  }, [page.id]);
+  useEffect(() => {
+    document.title = page.title;
+    const metadata = {
+      'meta[name="description"]': page.description,
+      'meta[property="og:title"]': page.title,
+      'meta[property="og:description"]': page.description,
+      'meta[name="twitter:title"]': page.title,
+      'meta[name="twitter:description"]': page.description,
+    };
+    for (const [selector, content] of Object.entries(metadata)) {
+      document.querySelector(selector)?.setAttribute('content', content);
     }
-  };
-
-  const handleClaimQuoteFromEstimator = (estimateSummary: string) => {
-    setPrefillScope(estimateSummary);
-    const elem = document.getElementById('contact');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#070A11] text-slate-900 dark:text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-600 dark:selection:text-cyan-200 relative overflow-x-hidden">
-      {/* Top Streamlined Navbar with Theme Toggle */}
-      <Navbar
-        onOpenConsultation={() => handleOpenConsultation('Executive Consultation')}
-        onSelectService={(serviceId) => handleOpenEstimator(serviceId)}
-      />
-
-      <main>
-        {/* 1. Asymmetrical Hero Section with Interactive HUD */}
-        <Hero
-          onOpenConsultation={() => handleOpenConsultation('Free Strategy Call')}
-          onOpenEstimator={() => handleOpenEstimator()}
-        />
-
-        {/* 2. Interactive Split-Screen Services Matrix */}
-        <ServicesGrid
-          onOpenConsultation={(topic) => handleOpenConsultation(topic)}
-          onSelectServiceForEstimator={(serviceId) => handleOpenEstimator(serviceId)}
-        />
-
-        {/* 3. Interactive Project Scope & Cost Estimator */}
-        <ProjectEstimator
-          key={estimatorInitialService}
-          initialServiceId={estimatorInitialService}
-          onRequestQuote={handleClaimQuoteFromEstimator}
-        />
-
-        {/* 4. Tech Stack Infrastructure & Benchmark Lab */}
-        <TechStackSection
-          onOpenConsultation={(tech) => handleOpenConsultation(`Tech Stack Architecture: ${tech}`)}
-        />
-
-        {/* 5. Why Choose Us & Agency Comparison Manifesto */}
-        <WhyChooseUs
-          onOpenConsultation={() => handleOpenConsultation('Why Choose Us - Consultation')}
-        />
-
-        {/* 6. Process / Delivery Roadmap */}
-        <ProcessTimeline
-          onOpenConsultation={() => handleOpenConsultation('Agile Sprint Roadmap')}
-        />
-
-        {/* 7. Magazine-Style Portfolio & Case Studies */}
-        <PortfolioSection
-          onOpenConsultation={(category) => handleOpenConsultation(`Case Study Inquiry: ${category}`)}
-        />
-
-        {/* 8. Verified Client Testimonials */}
-        <Testimonials
-          onOpenConsultation={() => handleOpenConsultation('Testimonials Inquiry')}
-        />
-
-        {/* 9. Commercial Engagement & Pricing Tiers */}
-        <EngagementModels
-          onOpenConsultation={(plan) => handleOpenConsultation(`Engagement Model: ${plan}`)}
-        />
-
-        {/* 10. High-Impact Contact & Lead Capture Terminal */}
-        <ContactSection
-          key={prefillScope}
-          prefillScope={prefillScope}
-        />
-      </main>
-
-      {/* Structured Footer */}
-      <Footer
-        onOpenConsultation={() => handleOpenConsultation('Footer Direct Strategy')}
-      />
-
-      {/* Floating Quick Action Controls */}
-      <FloatingActions
-        onOpenConsultation={() => handleOpenConsultation('Floating CTA Consultation')}
-        onOpenEstimator={() => handleOpenEstimator()}
-      />
-
-      {/* New Floating CTA (global) */}
-      <FloatingCTA onOpenSignup={() => setSignupModalOpen(true)} />
-
-      {/* Global Quick-Booking Consultation Modal */}
-      <ConsultationModal
-        key={`${consultationTopic}-${consultationModalOpen}`}
-        isOpen={consultationModalOpen}
-        onClose={() => setConsultationModalOpen(false)}
-        initialTopic={consultationTopic}
-      />
-
-      {/* Signup Modal */}
-      <SignupModal isOpen={signupModalOpen} onClose={() => setSignupModalOpen(false)} />
-      <Analytics />
-    </div>
-  );
-};
-
-export default App;
+  }, [page.title, page.description]);
+  return <AnimationProvider>
+    <a className="skip-link" href="#main-content">Skip to content</a>
+    <Navbar currentPage={page.id} />
+    <main id="main-content" tabIndex={-1}>
+      <SiteParticles />
+      {page.id === 'home' ? <HomePage /> : page.id === 'services' ? <ServicesPage /> : page.id === 'about' ? <AboutPage /> : page.id === 'contact' ? <ContactPage /> : (
+        <section className="container page-intro not-found">
+          <p className="eyebrow">PAGE NOT FOUND</p><h1>Let’s get you<br />back on track.</h1>
+          <p className="lead">This page may have moved. Explore our services or tell us what you’re looking to build.</p>
+          <a className="button button-primary" href="/">Back to home</a>
+        </section>
+      )}
+    </main>
+    <Footer /><WhatsAppWidget /><Analytics />
+  </AnimationProvider>;
+}

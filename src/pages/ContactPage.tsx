@@ -1,0 +1,6 @@
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { ContactSection } from '../components/contact/ContactSection';
+import { Reveal } from '../components/animation/Reveal';
+export function ContactPage() {
+  return <section className="container contact-page" id="contact"><Reveal className="contact-intro"><p className="eyebrow">LET’S TALK</p><h1>What would you<br />like to <span>build?</span></h1><p className="lead">A clear brief or an early idea — either is a good place to start. Tell us a little about your business and what you have in mind.</p><div className="contact-direct"><p className="eyebrow">PREFER EMAIL?</p><a href="mailto:mesingh9719@gmail.com">mesingh9719@gmail.com <ArrowUpRight size={17} aria-hidden="true" /></a><a href="mailto:susingh9719@gmail.com">susingh9719@gmail.com <ArrowUpRight size={17} aria-hidden="true" /></a></div><div className="what-next"><ArrowDownRight size={25} strokeWidth={1.5} aria-hidden="true" /><div><h2>What happens next?</h2><p>We’ll review your inquiry and get in touch to understand your requirements, answer questions, and discuss a practical next step.</p></div></div></Reveal><Reveal delay={0.1}><ContactSection /></Reveal></section>;
+}
